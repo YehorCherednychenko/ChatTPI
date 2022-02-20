@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package servertcp;
+import Game.GameLogic;
+import Game.GameWords;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -14,44 +17,63 @@ import java.util.*;
  * @author angelo
  */
 public class ServerThread extends Thread{
-    ServerSocket server = null;
+
     Socket client = null;
-    String stringaRicevuta = null;
-    String stringaModificata = null;
-    BufferedReader inDalClient;
-    DataOutputStream outVersoClient;
+    String clientResponse = null;
+    BufferedReader clientMessage;
+    DataOutputStream serverMessage;
+    GameLogic gameLogic = new GameLogic();
+
+
 
     public ServerThread (Socket client) throws IOException {
         this.client = client;
-        inDalClient = new BufferedReader(new InputStreamReader(this.client.getInputStream()));
-        outVersoClient = new DataOutputStream (this.client.getOutputStream());
+        clientMessage = new BufferedReader(new InputStreamReader(this.client.getInputStream()));
+        serverMessage = new DataOutputStream (this.client.getOutputStream());
     }
 
-    public void comunica() throws Exception{
+
+    public void gameStart() throws Exception {
+        gamePlay();
+    }
+
+
+    public void gamePlay() throws Exception{
         System.out.println("Esecuzione partita!");
-        stringaRicevuta = inDalClient.readLine();
-        while(stringaRicevuta != null && !stringaRicevuta.equals("FINE"))
+        clientResponse = clientMessage.readLine();
+
+        while(!clientResponse.equals("!") && gameLogic.stillInGame())
         {
-            stringaModificata = stringaRicevuta.toUpperCase();
-            outVersoClient.writeBytes( stringaModificata + "\n");
-            System.out.println("Stringa ricevuta e trasmessa. ");
-            stringaRicevuta = inDalClient.readLine();
+            if (clientResponse != null) {
+                serverMessage.writeBytes(gameLogic.getGameStringEncoded(clientResponse.charAt(0)));
+            }
+            
         }
 
-        outVersoClient.writeBytes("Server in chiusura...");
-        outVersoClient.close();
-        inDalClient.close();
+        endGame();
+
+    }
+
+
+    public void endGame() throws IOException {
+
+        serverMessage.writeBytes("Server in chiusura...");
+        serverMessage.close();
+        clientMessage.close();
         client.close();
     }
 
     public  void run()
     {
         try {
-            comunica();
+            gameStart();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
+
+
+
 }

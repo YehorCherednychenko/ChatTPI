@@ -23,8 +23,8 @@ public class ServerTCP {
         int serverPort = 6789;
         ServerSocket serverSocket = new ServerSocket(serverPort);
 
-        while(true)
-        {
+        while(true) {
+
             System.out.println("Server in attesa...");
             Socket newClient = serverSocket.accept();
             System.out.println("Client connesso...");
