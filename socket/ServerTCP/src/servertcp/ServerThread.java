@@ -28,14 +28,15 @@ public class ServerThread extends Thread{
 
 
             serverMessage.writeBytes("Benvenuti nel Gioco dell'Impiccato!!\n");
-            serverMessage.writeBytes("Premere 1 per leggere le regole.\n");
+            serverMessage.writeBytes("Premere 1 per leggere le regole con il manuale.\n");
             serverMessage.writeBytes("Premere 2 per giocare\n");
             serverMessage.writeBytes("! pre uscire\n");
             clientResponse = clientMessage.readLine();
 
             if (clientResponse.equals("1")) {
                 serverMessage.writeBytes("Tradizionale gioco dell'Impicato, con la differenza che all'inzio vengono subito fornite la prima e l'ultima lettera della " +
-                        "parola da indovinare. Quindi si deve indovinare una parola fornita dal programma avendo 9 tentativi. Buon divertimento!\n");
+                        "parola da indovinare. Quindi si deve indovinare una parola fornita dal programma avendo 9 tentativi. Si deve inserire una lettera alla volta, '!' per uscire dal gioco oppure '.' per cambiare la parola" +
+                        " recuperando così anche tutta la vita. Buon divertimento!\n");
 
                 serverMessage.writeBytes("Premere 2 per giocare\n");
                 serverMessage.writeBytes("! pre uscire\n");
