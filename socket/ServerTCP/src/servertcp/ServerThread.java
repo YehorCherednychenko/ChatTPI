@@ -33,10 +33,10 @@ public class ServerThread extends Thread{
             if (clientResponse.equals("1")) {
                 serverMessage.writeBytes("Tradizionale gioco dell'Impicato, con la differenza che all'inzio vengono subito fornite la prima e l'ultima lettera della " +
                         "parola da indovinare. Quindi si deve indovinare una parola fornita dal programma avendo 9 tentativi. Si deve inserire una lettera alla volta, '!' per uscire dal gioco oppure '.' per cambiare la parola" +
-                        " recuperando così anche tutta la vita. Buon divertimento!\n");
+                        " recuperando così anche tutta la vita. Le lettere accentate non vengono considerate. Buon divertimento!\n");
 
                 serverMessage.writeBytes("Premere 2 per giocare\n");
-                serverMessage.writeBytes("! pre uscire\n");
+                serverMessage.writeBytes("! Per uscire\n");
                 String newClientResponse = clientMessage.readLine();
                 if (newClientResponse.equals("2")) {
                     categoryChoice();
