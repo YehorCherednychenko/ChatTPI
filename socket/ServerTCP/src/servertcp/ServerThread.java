@@ -1,11 +1,8 @@
 package servertcp;
 import Game.GameLogic;
-import Game.GameWordsNature;
 
 import java.io.*;
 import java.net.*;
-import java.util.*;
-
 
 
 public class ServerThread extends Thread{
@@ -43,28 +40,30 @@ public class ServerThread extends Thread{
                 String newClientResponse = clientMessage.readLine();
                 if (newClientResponse.equals("2")) {
                     categoryChoice();
-                    gamePlay();
+                    if (gameLogic.getGameString() != null)
+                        gamePlay();
                 }
 
                 else
                     endGame();
             }
             else if(clientResponse.equals("2")) {
-                categoryChoice();
-                gamePlay();
+                if(categoryChoice())
+                    gamePlay();
             }
 
             else
                 endGame();
     }
 
-    private void categoryChoice() throws IOException {
+    private boolean categoryChoice() throws IOException {
         System.out.println("Scelta categoria");
         serverMessage.writeBytes("Scegliere la categoria:\n");
         serverMessage.writeBytes("1. Piante e la natura\n");
         serverMessage.writeBytes("2. Sport\n");
         serverMessage.writeBytes("3. Cibo\n");
         serverMessage.writeBytes("4. Bevande\n");
+        serverMessage.writeBytes("'!' Per uscire\n");
 
         clientResponse = clientMessage.readLine();
 
@@ -72,23 +71,28 @@ public class ServerThread extends Thread{
         if (clientResponse.equals("1")) {
             System.out.println("Natura");
             gameLogic.setGameStringNature();
+            return true;
         }
 
         if (clientResponse.equals("2")) {
             System.out.println("Sport");
             gameLogic.setGameStringSport();
+            return true;
         }
 
         if (clientResponse.equals("3")) {
             System.out.println("Cibo");
             gameLogic.setGameStringMeals();
+            return true;
         }
 
         if (clientResponse.equals("4")) {
             System.out.println("Bevande");
             gameLogic.setGameStringDrinks();
+            return true;
         }
-
+        endGame();
+        return false;
     }
 
 
@@ -120,8 +124,11 @@ public class ServerThread extends Thread{
                 }
             }
             else {
-                if (clientResponse.startsWith("."))
-                    resetGame();
+                if (clientResponse.startsWith(".")) {
+                    if(!resetGame())
+                        break;
+                }
+
 
                 else
                     {
@@ -143,9 +150,11 @@ public class ServerThread extends Thread{
 
 
 
-    private void resetGame() throws IOException {
-        categoryChoice();
-        serverMessage.writeBytes("Gioco Riavviato. Nuova parola generata: " + gameLogic.getGameStringEncoded() +'\n');
+    private boolean resetGame() throws IOException {
+        boolean inGame = categoryChoice();
+        if (inGame)
+            serverMessage.writeBytes("Gioco Riavviato. Nuova parola generata: " + gameLogic.getGameStringEncoded() +'\n');
+        return inGame;
     }
     private void endGameLost() throws IOException {
         serverMessage.writeBytes("HAI PERSO! La parola da indovinare era: " + gameLogic.getGameString() + '\n');

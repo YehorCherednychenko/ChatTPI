@@ -87,14 +87,16 @@ public class Client {
                 System.out.println(serverResponseMessage);
                 serverResponseMessage = serverResponse.readLine();
                 System.out.println(serverResponseMessage);
+                serverResponseMessage = serverResponse.readLine();
+                System.out.println(serverResponseMessage);
 
 
                 do {
                     choice = true;
-                    System.out.println("Scegli la categoria: ");
+                    System.out.println("Scegli la categoria o esci: ");
                     playerGuess = inputKeyboard.readLine();
 
-                    if(playerGuess.equals("1") || playerGuess.equals("2") || playerGuess.equals("3") || playerGuess.equals("4"))
+                    if(playerGuess.equals("1") || playerGuess.equals("2") || playerGuess.equals("3") || playerGuess.equals("4") || playerGuess.equals("!"))
                         choice = false;
 
                 }while (choice);
@@ -102,6 +104,12 @@ public class Client {
                 clientMessage.writeBytes(playerGuess + '\n');
 
                 serverResponseMessage = serverResponse.readLine();
+                if(serverResponseMessage.equals("Server in chiusura...")) {
+                    System.out.println(serverResponseMessage);
+                    System.out.println( "CLIENT: termina elaborazione e chiudi connessione");
+                    clientSocket.close();
+                    System.exit(2);
+                }
                 System.out.println("Indovina: " + serverResponseMessage);
             }
         }
@@ -128,21 +136,31 @@ public class Client {
             System.out.println(serverResponseMessage);
             serverResponseMessage = serverResponse.readLine();
             System.out.println(serverResponseMessage);
+            serverResponseMessage = serverResponse.readLine();
+            System.out.println(serverResponseMessage);
 
 
             do {
                 choice = true;
-                System.out.println("Scegli la categoria: ");
+                System.out.println("Scegli la categoria o esci: ");
                 playerGuess = inputKeyboard.readLine();
 
-                if(playerGuess.equals("1") || playerGuess.equals("2") || playerGuess.equals("3") || playerGuess.equals("4"))
+                if (playerGuess.equals("1") || playerGuess.equals("2") || playerGuess.equals("3") || playerGuess.equals("4") || playerGuess.equals("!"))
                     choice = false;
 
             }while (choice);
 
 
             clientMessage.writeBytes(playerGuess + "\n");
+
+
             serverResponseMessage = serverResponse.readLine();
+            if(serverResponseMessage.equals("Server in chiusura...")) {
+                System.out.println(serverResponseMessage);
+                System.out.println( "CLIENT: termina elaborazione e chiudi connessione");
+                clientSocket.close();
+                System.exit(2);
+            }
             System.out.println("Indovina: " + serverResponseMessage);
         }
 
@@ -188,20 +206,29 @@ public class Client {
                         System.out.println(serverResponseMessage);
                         serverResponseMessage = serverResponse.readLine();
                         System.out.println(serverResponseMessage);
+                        serverResponseMessage = serverResponse.readLine();
+                        System.out.println(serverResponseMessage);
 
                         boolean choice;
                         do {
                             choice = true;
-                            System.out.println("Scegli la categoria: ");
+                            System.out.println("Scegli la categoria o esci: ");
                             playerGuess = inputKeyboard.readLine();
 
-                            if(playerGuess.equals("1") || playerGuess.equals("2") || playerGuess.equals("3") || playerGuess.equals("4"))
+                            if (playerGuess.equals("1") || playerGuess.equals("2") || playerGuess.equals("3") || playerGuess.equals("4") || playerGuess.equals("!"))
                                 choice = false;
 
                         }while (choice);
 
                         clientMessage.writeBytes(playerGuess + '\n');
                         serverResponseMessage = serverResponse.readLine();
+
+                        if(serverResponseMessage.equals("Server in chiusura...")) {
+                            System.out.println(serverResponseMessage);
+                            System.out.println( "CLIENT: termina elaborazione e chiudi connessione");
+                            clientSocket.close();
+                            System.exit(2);
+                        }
                         System.out.println(serverResponseMessage);
                     }
                     else {
@@ -212,6 +239,7 @@ public class Client {
 
 
                     if(serverResponseMessage.equals("Server in chiusura...")) {
+                        System.out.println(serverResponseMessage);
                         System.out.println( "CLIENT: termina elaborazione e chiudi connessione");
                         clientSocket.close();
                         System.exit(2);
@@ -227,20 +255,30 @@ public class Client {
                         System.out.println(serverResponseMessage);
                         serverResponseMessage = serverResponse.readLine();
                         System.out.println(serverResponseMessage);
+                        serverResponseMessage = serverResponse.readLine();
+                        System.out.println(serverResponseMessage);
 
                         boolean choice;
                         do {
                             choice = true;
-                            System.out.println("Scegli la categoria: ");
+                            System.out.println("Scegli la categoria o esci: ");
                             playerGuess = inputKeyboard.readLine();
 
-                            if(playerGuess.equals("1") || playerGuess.equals("2") || playerGuess.equals("3") || playerGuess.equals("4"))
+                            if(playerGuess.equals("1") || playerGuess.equals("2") || playerGuess.equals("3") || playerGuess.equals("4") || playerGuess.equals("!"))
                                 choice = false;
 
                         }while (choice);
 
+
                         clientMessage.writeBytes(playerGuess + '\n');
                         serverResponseMessage = serverResponse.readLine();
+
+                        if(serverResponseMessage.equals("Server in chiusura...")) {
+                            System.out.println(serverResponseMessage);
+                            System.out.println( "CLIENT: termina elaborazione e chiudi connessione");
+                            clientSocket.close();
+                            System.exit(2);
+                        }
                         System.out.println(serverResponseMessage);
                     }
 
