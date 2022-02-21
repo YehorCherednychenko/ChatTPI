@@ -4,7 +4,7 @@ import java.util.Random;
 
 public enum GameWordsDrinks {
 
-    ACQUA, COLA, FANTA, SPRITE, CAFFE;
+    ACQUA, COLA, ARANCIATA, SPRITE, CAFFE, LEMONSODA, SUCCO, CEDRATA, CHINOTTO, GASSOSA, GINGER, ORZATA, SPUMA, TAMARINDO, BIRRA, VINO, COCKTAIL, CAPPUCINO;
 
 
     public static GameWordsDrinks getRandomWord() {
