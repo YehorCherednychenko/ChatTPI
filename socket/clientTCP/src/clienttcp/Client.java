@@ -171,7 +171,7 @@ public class Client {
           System.err.println("Host sconosciuto");
       }
       catch (Exception e){
-          System.out.println("Errore durante la connessione");
+          System.err.println("Errore durante la connessione");
           System.exit(1);
       }
       return clientSocket;
@@ -284,10 +284,10 @@ public class Client {
 
                 }
                 else
-                    System.out.println("INSERISCI UNA LETTERA, '!' SE VUOI FINIRE DI GIOCARE OPPURE '.' PER RICOMINCIARE");
+                    System.err.println("INSERISCI UNA LETTERA, '!' SE VUOI FINIRE DI GIOCARE OPPURE '.' PER RICOMINCIARE");
             }
            else
-               System.out.println("INSERISCI UNA LETTERA, '!' SE VUOI FINIRE DI GIOCARE OPPURE '.' PER RICOMINCIARE");
+               System.err.println("INSERISCI UNA LETTERA, '!' SE VUOI FINIRE DI GIOCARE OPPURE '.' PER RICOMINCIARE");
 
 
 
@@ -297,7 +297,7 @@ public class Client {
         }
         catch(Exception e){
             System.out.println(e.getMessage());
-            System.out.println("Errore durante la comunicazione con il server");
+            System.err.println("Errore durante la comunicazione con il server");
             System.exit(1);
         }
     }
