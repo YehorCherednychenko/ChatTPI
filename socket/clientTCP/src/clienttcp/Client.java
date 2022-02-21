@@ -78,6 +78,30 @@ public class Client {
             else {
                 clientMessage.writeBytes(playerGuess + "\n");
                 serverResponseMessage = serverResponse.readLine();
+                System.out.println(serverResponseMessage);
+                serverResponseMessage = serverResponse.readLine();
+                System.out.println(serverResponseMessage);
+                serverResponseMessage = serverResponse.readLine();
+                System.out.println(serverResponseMessage);
+                serverResponseMessage = serverResponse.readLine();
+                System.out.println(serverResponseMessage);
+                serverResponseMessage = serverResponse.readLine();
+                System.out.println(serverResponseMessage);
+
+
+                do {
+                    choice = true;
+                    System.out.println("Scegli la categoria: ");
+                    playerGuess = inputKeyboard.readLine();
+
+                    if(playerGuess.equals("1") || playerGuess.equals("2") || playerGuess.equals("3") || playerGuess.equals("4"))
+                        choice = false;
+
+                }while (choice);
+
+                clientMessage.writeBytes(playerGuess + '\n');
+
+                serverResponseMessage = serverResponse.readLine();
                 System.out.println("Indovina: " + serverResponseMessage);
             }
         }
@@ -93,6 +117,30 @@ public class Client {
             System.exit(2);
         }
         else {
+            clientMessage.writeBytes(playerGuess + "\n");
+            serverResponseMessage = serverResponse.readLine();
+            System.out.println(serverResponseMessage);
+            serverResponseMessage = serverResponse.readLine();
+            System.out.println(serverResponseMessage);
+            serverResponseMessage = serverResponse.readLine();
+            System.out.println(serverResponseMessage);
+            serverResponseMessage = serverResponse.readLine();
+            System.out.println(serverResponseMessage);
+            serverResponseMessage = serverResponse.readLine();
+            System.out.println(serverResponseMessage);
+
+
+            do {
+                choice = true;
+                System.out.println("Scegli la categoria: ");
+                playerGuess = inputKeyboard.readLine();
+
+                if(playerGuess.equals("1") || playerGuess.equals("2") || playerGuess.equals("3") || playerGuess.equals("4"))
+                    choice = false;
+
+            }while (choice);
+
+
             clientMessage.writeBytes(playerGuess + "\n");
             serverResponseMessage = serverResponse.readLine();
             System.out.println("Indovina: " + serverResponseMessage);
@@ -127,9 +175,41 @@ public class Client {
                     playerGuess = playerGuess.toUpperCase();
 
 
-                    clientMessage.writeBytes(playerGuess + "\n");
-                    serverResponseMessage = serverResponse.readLine();
-                    System.out.println(serverResponseMessage);
+
+                    if (playerGuess.equals(".")) {
+                        clientMessage.writeBytes(playerGuess + "\n");
+                        serverResponseMessage = serverResponse.readLine();
+                        System.out.println(serverResponseMessage);
+                        serverResponseMessage = serverResponse.readLine();
+                        System.out.println(serverResponseMessage);
+                        serverResponseMessage = serverResponse.readLine();
+                        System.out.println(serverResponseMessage);
+                        serverResponseMessage = serverResponse.readLine();
+                        System.out.println(serverResponseMessage);
+                        serverResponseMessage = serverResponse.readLine();
+                        System.out.println(serverResponseMessage);
+
+                        boolean choice;
+                        do {
+                            choice = true;
+                            System.out.println("Scegli la categoria: ");
+                            playerGuess = inputKeyboard.readLine();
+
+                            if(playerGuess.equals("1") || playerGuess.equals("2") || playerGuess.equals("3") || playerGuess.equals("4"))
+                                choice = false;
+
+                        }while (choice);
+
+                        clientMessage.writeBytes(playerGuess + '\n');
+                        serverResponseMessage = serverResponse.readLine();
+                        System.out.println(serverResponseMessage);
+                    }
+                    else {
+                        clientMessage.writeBytes(playerGuess + "\n");
+                        serverResponseMessage = serverResponse.readLine();
+                        System.out.println(serverResponseMessage);
+                    }
+
 
                     if(serverResponseMessage.equals("Server in chiusura...")) {
                         System.out.println( "CLIENT: termina elaborazione e chiudi connessione");
@@ -137,6 +217,29 @@ public class Client {
                         System.exit(2);
                     }
                     if(serverResponseMessage.contains("PERSO") || serverResponseMessage.contains("VINTO")) {
+                        serverResponseMessage = serverResponse.readLine();
+                        System.out.println(serverResponseMessage);
+                        serverResponseMessage = serverResponse.readLine();
+                        System.out.println(serverResponseMessage);
+                        serverResponseMessage = serverResponse.readLine();
+                        System.out.println(serverResponseMessage);
+                        serverResponseMessage = serverResponse.readLine();
+                        System.out.println(serverResponseMessage);
+                        serverResponseMessage = serverResponse.readLine();
+                        System.out.println(serverResponseMessage);
+
+                        boolean choice;
+                        do {
+                            choice = true;
+                            System.out.println("Scegli la categoria: ");
+                            playerGuess = inputKeyboard.readLine();
+
+                            if(playerGuess.equals("1") || playerGuess.equals("2") || playerGuess.equals("3") || playerGuess.equals("4"))
+                                choice = false;
+
+                        }while (choice);
+
+                        clientMessage.writeBytes(playerGuess + '\n');
                         serverResponseMessage = serverResponse.readLine();
                         System.out.println(serverResponseMessage);
                     }

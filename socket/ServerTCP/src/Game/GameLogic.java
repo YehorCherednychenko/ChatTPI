@@ -5,15 +5,10 @@ public class GameLogic {
     // ---Game parameters
     String gameString = null;
     StringBuilder gameStringEncoded;
-    int gameLife = 9;
+    int gameLife;
 
 
-    public GameLogic() {
-
-        gameString = GameWords.getRandomWord().name();
-        gameStringEncoded = new StringBuilder(gameString.charAt(0) + "_".repeat(gameString.length() - 2) + gameString.charAt(gameString.length() - 1));
-        System.out.println(gameString + " " + gameStringEncoded);
-    }
+    public GameLogic() {}
 
     private String guessOfThePlayer(char toVerify) {
 
@@ -64,11 +59,33 @@ public class GameLogic {
         return gameString;
     }
 
-    public void resetAll() {
-        gameString = GameWords.getRandomWord().name();
-        gameStringEncoded = new StringBuilder(gameString.charAt(0) + "_".repeat(gameString.length() - 2) + gameString.charAt(gameString.length() - 1));
+
+    public void setGameStringNature() {
+        this.gameString = GameWordsNature.getRandomWord().name();
+        this.gameStringEncoded = new StringBuilder(gameString.charAt(0) + "_".repeat(gameString.length() - 2) + gameString.charAt(gameString.length() - 1));
         System.out.println(gameString + " " + gameStringEncoded);
         gameLife = 9;
-
     }
+
+    public void setGameStringSport() {
+        this.gameString = GameWordsSport.getRandomWord().name();
+        this.gameStringEncoded = new StringBuilder(gameString.charAt(0) + "_".repeat(gameString.length() - 2) + gameString.charAt(gameString.length() - 1));
+        System.out.println(gameString + " " + gameStringEncoded);
+        gameLife = 9;
+    }
+
+    public void setGameStringMeals() {
+        this.gameString = GameWordsMeals.getRandomWord().name();
+        this.gameStringEncoded = new StringBuilder(gameString.charAt(0) + "_".repeat(gameString.length() - 2) + gameString.charAt(gameString.length() - 1));
+        System.out.println(gameString + " " + gameStringEncoded);
+        gameLife = 9;
+    }
+
+    public void setGameStringDrinks() {
+        this.gameString = GameWordsDrinks.getRandomWord().name();
+        this.gameStringEncoded = new StringBuilder(gameString.charAt(0) + "_".repeat(gameString.length() - 2) + gameString.charAt(gameString.length() - 1));
+        System.out.println(gameString + " " + gameStringEncoded);
+        gameLife = 9;
+    }
+
 }

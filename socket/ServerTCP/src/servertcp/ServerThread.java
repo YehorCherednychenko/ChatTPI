@@ -1,6 +1,6 @@
 package servertcp;
 import Game.GameLogic;
-import Game.GameWords;
+import Game.GameWordsNature;
 
 import java.io.*;
 import java.net.*;
@@ -41,15 +41,54 @@ public class ServerThread extends Thread{
                 serverMessage.writeBytes("Premere 2 per giocare\n");
                 serverMessage.writeBytes("! pre uscire\n");
                 String newClientResponse = clientMessage.readLine();
-                if (newClientResponse.equals("2"))
+                if (newClientResponse.equals("2")) {
+                    categoryChoice();
                     gamePlay();
+                }
+
                 else
                     endGame();
             }
-            else if(clientResponse.equals("2"))
+            else if(clientResponse.equals("2")) {
+                categoryChoice();
                 gamePlay();
+            }
+
             else
                 endGame();
+    }
+
+    private void categoryChoice() throws IOException {
+        System.out.println("Scelta categoria");
+        serverMessage.writeBytes("Scegliere la categoria:\n");
+        serverMessage.writeBytes("1. Piante e la natura\n");
+        serverMessage.writeBytes("2. Sport\n");
+        serverMessage.writeBytes("3. Cibo\n");
+        serverMessage.writeBytes("4. Bevande\n");
+
+        clientResponse = clientMessage.readLine();
+
+
+        if (clientResponse.equals("1")) {
+            System.out.println("Natura");
+            gameLogic.setGameStringNature();
+        }
+
+        if (clientResponse.equals("2")) {
+            System.out.println("Sport");
+            gameLogic.setGameStringSport();
+        }
+
+        if (clientResponse.equals("3")) {
+            System.out.println("Cibo");
+            gameLogic.setGameStringMeals();
+        }
+
+        if (clientResponse.equals("4")) {
+            System.out.println("Bevande");
+            gameLogic.setGameStringDrinks();
+        }
+
     }
 
 
@@ -105,7 +144,7 @@ public class ServerThread extends Thread{
 
 
     private void resetGame() throws IOException {
-        gameLogic.resetAll();
+        categoryChoice();
         serverMessage.writeBytes("Gioco Riavviato. Nuova parola generata: " + gameLogic.getGameStringEncoded() +'\n');
     }
     private void endGameLost() throws IOException {
