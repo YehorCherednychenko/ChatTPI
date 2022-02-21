@@ -110,14 +110,16 @@ public class ServerThread extends Thread{
                     String guessResult = gameLogic.getGameStringEncoded(clientResponse.charAt(0)) + '\n';
 
                     if(!guessResult.contains("_")) {
-                        endGameWin();
+                        if(!endGameWin())
+                            break;
                     }
 
                     else {
                         if (gameLogic.stillInGame())
                             serverMessage.writeBytes(guessResult);
                         else {
-                            endGameLost();
+                            if (!endGameLost())
+                                break;
                         }
                     }
 
@@ -156,13 +158,13 @@ public class ServerThread extends Thread{
             serverMessage.writeBytes("Gioco Riavviato. Nuova parola generata: " + gameLogic.getGameStringEncoded() +'\n');
         return inGame;
     }
-    private void endGameLost() throws IOException {
+    private boolean endGameLost() throws IOException {
         serverMessage.writeBytes("HAI PERSO! La parola da indovinare era: " + gameLogic.getGameString() + '\n');
-        resetGame();
+        return resetGame();
     }
-    private void endGameWin() throws IOException {
+    private boolean endGameWin() throws IOException {
         serverMessage.writeBytes("HAI VINTO!! La parola indovinata: " + gameLogic.getGameString() + '\n');
-        resetGame();
+        return resetGame();
     }
 
     public void endGame() throws IOException {
